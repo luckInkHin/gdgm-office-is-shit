@@ -10,7 +10,7 @@ introduction：
 
 需要注意：
 脚本仅为学习参考测试，使用脚本填写数据影响的后果将由使用者承担，
-本作不允许不用于任何商业用途,同时本软件不承担用户因操作不当对自己和他人造成任何形式的损失或伤害。
+本作不允许用于任何商业用途,同时本软件不承担用户因操作不当对自己和他人造成任何形式的损失或伤害。
 """
 
 from http.cookiejar import Cookie
@@ -43,6 +43,8 @@ login_password = "123456"
 pidx = 0 
 #设置完成页数上限（不超过总页数）
 pidx_max = 3
+#设置交表延时(s)
+post_time = 0
 #设置默认7*20任务列表
 list_S = [[0 for col in range(7)] for row in range(20)]
 #获取登陆Cookies
@@ -126,6 +128,8 @@ for pidx in range(1,pidx_max + 1) :
             'rn' : getrandomString(10)
         }
         S = requests.post(post_url,headers=Sheader,data=Sdata,cookies=cookie)
+        print('第' + str(pidx) + '页任务' + str(i + 1) + "已完成，进行延迟中    " + str(post_time) + '秒开始下一题')
+        time.sleep(post_time)
     #    aaaa = S.content.decode("utf-8")
     print('已完成第' + str(pidx) + '页任务列表')
 print('已完成指定操作，请登录平台查看成绩。')
